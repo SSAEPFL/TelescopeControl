@@ -141,24 +141,24 @@ class OpticalTrackingStation(Station):
         alt, az = helperfunctions.get_sat_altaz_position(
             satellite, self.position, time)
         self._log_debug("Computed following Altitude: " + alt +
-                        ", azimuth: " + az + ", distance: " + distance + ".")
+                        ", azimuth: " + az + ".")
 
         # Loading the ephemerides
         eph = load('datafiles/de440s.bsp')
 
         # Checking if the satellite is above the horizon and sunlit
-        if alt.degrees > 10 and satellite.at(t).is_sunlit(eph):
+        if alt.degrees > 10 and satellite.at(time).is_sunlit(eph):
             self._log_info("Station can observe satellite: " +
-                           satellite.model.intldesg, " at time: " + time + ".")
+                           satellite.model.intldesg, " at time: " + str(time) + ".")
             return True
         else:
             self._log_info("Station cannot observe satellite: " +
-                           satellite.model.intldesg, " at time: " + time + ".")
+                           satellite.model.intldesg, " at time: " + str(time) + ".")
             return False
 
     def display_image(self, image):
         """Displays an image on the screen using cv2."""
-        cv2.imshow('Tracked Particles', frame)
+        cv2.imshow('Tracked Particles', image)
         cv2.waitKey(1)
 
     def observe(self, satellite: EarthSatellite, time: Time) -> None:

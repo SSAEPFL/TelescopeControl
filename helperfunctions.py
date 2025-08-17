@@ -9,7 +9,7 @@ from datetime import datetime
 from datetime import timedelta
 import dateutil.parser
 from calendar import monthrange
-from CelestrakTLEDL import download_tle
+#from CelestrakTLEDL import download_tle
 import numpy as np
 from hardware import Camera, FieldOfView
 import sep
